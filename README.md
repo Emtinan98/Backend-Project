@@ -1,16 +1,17 @@
-# Project Name: READ
+# Project Name: MyComics
 
 ## Idea:
-It is a system to stimulate reading in the community, and points can be collected and competed with other readers 
 
+It is a system to stimulate reading in the community, and points can be collected and competed with other readers
 
 ## Inspiration:
-- Facilitate reading using the gamifiction strategy
+
+- Facilitate reading and make it more enjoyable by competing with readers.
 
 
 ## List of Services / Features:
 
-- Display and browse all the content.
+- Display and browse all the Comics.
 - Display and browse all the readers.
 - Every Reader can get point if he write a feedback.
 - A display panel for the top 10 readers 
@@ -20,7 +21,7 @@ It is a system to stimulate reading in the community, and points can be collecte
 
 ### Admin
 
-- Create, Read, Update, Delete content.
+- Create, Read, Update, Delete Comics.
 - Create, Read, Update, Delete feedback.
 - Create, Read, Update, Delete Reader.
 - Create, Read, Update, Delete visitor.
@@ -29,12 +30,15 @@ It is a system to stimulate reading in the community, and points can be collecte
 
 - Create, Read, Update, Delete feedback.
 - Create, Read, Update, Delete, Edit profile.
-- get point
 - Search for content .
+- can follow other reader.
+- Can view panel for the top 10 readers.
+- can view top 10 Comics.
 
 ### Visitor
 
-- View the content.
+- View the Comics.
 - View the reader profile.
-- Search for content.
-
+- Can view panel for the top 10 readers.
+- can view top 10 Comics.
+- Search for Comics.
