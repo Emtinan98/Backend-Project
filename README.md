@@ -14,7 +14,9 @@ It is a system to stimulate reading in the community, and points can be collecte
 - Display and browse all the Comics.
 - Display and browse all the readers.
 - Every Reader can get point if he write a feedback.
-- A display panel for the top 10 readers 
+- A display panel for the top 10 readers.
+- can view top 10 Comics.
+
 
 ## User Stories
 - Type of users: Admin, Reader , and Visitor.
@@ -30,7 +32,7 @@ It is a system to stimulate reading in the community, and points can be collecte
 
 - Create, Read, Update, Delete feedback.
 - Create, Read, Update, Delete, Edit profile.
-- Search for content .
+- Search for Comics .
 - can follow other reader.
 - Can view panel for the top 10 readers.
 - can view top 10 Comics.
