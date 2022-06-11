@@ -15,6 +15,8 @@ from .models import *
 
 # ADMIN ONLY CHICK THE PERMISSION
 @api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def add_comic(request: Request):
     if not request.user.is_authenticated or not request.user.has_perm('comic.add_comic'):
         return Response("Not Allowed", status=status.HTTP_400_BAD_REQUEST)
@@ -49,6 +51,8 @@ def list_comic(request: Request):
 
 
 @api_view(['PUT'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def update_comic(request: Request, comic_id):
     comic = Comic.objects.get(id=comic_id)
 
@@ -66,6 +70,8 @@ def update_comic(request: Request, comic_id):
 
 
 @api_view(['DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def delete_comic(request: Request, comic_id):
     comic = Comic.objects.get(id=comic_id)
     comic.delete()
@@ -74,6 +80,8 @@ def delete_comic(request: Request, comic_id):
 
 # READER & ADMIN CHICK THE PERMISSION
 @api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def add_feedback(request: Request):
     if not request.user.is_authenticated or not request.user.has_perm('feedback.add_feedback'):
         return Response("Not Allowed", status=status.HTTP_400_BAD_REQUEST)
@@ -103,6 +111,8 @@ def list_feedback(request: Request):
 
 
 @api_view(['PUT'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def update_feedback(request: Request, feedback_id):
     feedback = Comic.objects.get(id=feedback_id)
 
@@ -120,6 +130,8 @@ def update_feedback(request: Request, feedback_id):
 
 
 @api_view(['DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def delete_feedback(request: Request, feedback_id):
     feedback = Feedback.objects.get(id=feedback_id)
     feedback.delete()
@@ -128,6 +140,8 @@ def delete_feedback(request: Request, feedback_id):
 
 # READER & ADMIN CHICK THE PERMISSION
 @api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def add_profile(request: Request):
     if not request.user.is_authenticated or not request.user.has_perm('profile.add_profile'):
         return Response("Not Allowed", status=status.HTTP_400_BAD_REQUEST)
@@ -159,6 +173,8 @@ def list_profile(request: Request):
 
 
 @api_view(['PUT'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def update_profile(request: Request, profile_id):
     profile = Profile.objects.get(id=profile_id)
 
@@ -176,6 +192,8 @@ def update_profile(request: Request, profile_id):
 
 
 @api_view(['DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def delete_profile(request: Request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     profile.delete()
