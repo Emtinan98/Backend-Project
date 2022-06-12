@@ -2,8 +2,9 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
+
+
 
 class Comic(models.Model):
     title = models.CharField(max_length=128)
@@ -28,6 +29,13 @@ class Profile(models.Model):
     image = models.URLField()
 
 
-class Points(models.Model):
-    feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+class FollowersCount(models.Model):
+    follower = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Reader(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     score = models.IntegerField()
+

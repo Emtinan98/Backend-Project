@@ -5,4 +5,4 @@ from .models import *
 admin.site.register(Comic)
 admin.site.register(Feedback)
 admin.site.register(Profile)
-admin.site.register(Points)
+admin.site.register(Reader)

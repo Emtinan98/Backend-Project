@@ -16,9 +16,11 @@ urlpatterns = [
     path("all_profile/", views.list_profile, name="list_profile"),
     path("update_profile/<profile_id>/", views.update_profile, name="update_profile"),
     path("delete_profile/<profile_id>/", views.delete_profile, name="delete_profile"),
-    path("score/", views.score, name="score"),  # not in postman
+  # path("score/", views.score, name="score"),  # not in postman
     path("follow/", views.follow, name="follow"),  # not in postman
     path("top10_comic/", views.top10_comic, name="top10_comic"),
     path("top10_reader/", views.top10_reader, name="top10_reader"),
+    path("search_for_comic/", views.search_for_comic, name="search_for_comic"),
+    path("search_for_profile/", views.search_for_profile, name="search_for_profile"),
 
 ]

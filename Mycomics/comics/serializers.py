@@ -10,8 +10,6 @@ class UserSerializerView(serializers.ModelSerializer):
 
 
 class ComicSerializerView(serializers.ModelSerializer):
-    user = UserSerializerView()
-
     class Meta:
         model = Comic
         fields = '__all__'
@@ -45,7 +43,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PointsSerializer(serializers.ModelSerializer):
+class ReaderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Points
+        model = Reader
         fields = '__all__'

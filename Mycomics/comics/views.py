@@ -36,15 +36,11 @@ def add_comic(request: Request):
 
 @api_view(['GET'])
 def list_comic(request: Request):
-    if 'search' in request.query_params:
-        search_phrase = request.query_params['search']
-        comic = Comic.objects.filter(title__contains=search_phrase)
-    else:
-        comic = Comic.objects.order_by('-created_at').all()
+    comic = Comic.objects.all()
 
     responseData = {
-        "msg": "list of notes",
-        "Comics": ComicSerializerView(instance=comic, many=True).data
+        "msg": "list of Comic",
+        "Comics": ComicSerializer(instance=comic, many=True).data
     }
 
     return Response(responseData)
@@ -161,9 +157,7 @@ def add_profile(request: Request):
 
 @api_view(['GET'])
 def list_profile(request: Request):
-    if 'search' in request.query_params:
-        search_phrase = request.query_params['search']
-        profile = Profile.objects.filter(name__contains=search_phrase)
+    profile = Profile.objects.all()
 
     responseData = {
         "msg": " list of profile ",
@@ -200,13 +194,21 @@ def delete_profile(request: Request, profile_id):
     return Response({"msg": "Deleted Successfully"})
 
 
-@api_view(['GET'])
-def score(request: Request):
-    pass
-
-
+@api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def follow(request: Request):
-    pass
+    follower = request.POST['follower']
+    user = request.POST['user']
+
+    if FollowersCount.objects.filter(follower=follower, user=user).first():
+        delete_follower = FollowersCount.objects.get(follower=follower, user=user)
+        delete_follower.delete()
+        return Response({"msg": "unfollow"})
+    else:
+        new_follower = FollowersCount.objects.create(follower=follower, user=user)
+        new_follower.save()
+        return Response({"msg": "follow"})
 
 
 @api_view(['GET'])
@@ -222,10 +224,38 @@ def top10_comic(request: Request):
 
 @api_view(['GET'])
 def top10_reader(request: Request):
-    top = Points.objects.order_by('-score')[:10]
+    top = Reader.objects.order_by('-score')[:10]
 
     dataResponse = {
         "msg": "List of Top 10 Readers ",
-        "TOP 10 Readers : ": PointsSerializer(instance=top, many=True).data
+        "TOP 10 Readers : ": ReaderSerializer(instance=top, many=True).data
     }
     return Response(dataResponse)
+
+
+@api_view(['GET'])
+def search_for_comic(request: Request):
+    if request.method == 'GET':
+        comic = Comic.objects.all()
+        title = request.GET.get('title', None)
+        if title is not None:
+            search_s = Comic.objects.filter(title=title)
+            search_lawyer = {
+                "Comic": ComicSerializerView(instance=search_s, many=True).data
+            }
+            return Response(search_lawyer)
+    return Response("non")
+
+
+@api_view(['GET'])
+def search_for_profile(request: Request):
+    if request.method == 'GET':
+        profile = Profile.objects.all()
+        name = request.GET.get('name', None)
+        if name is not None:
+            search_s = Comic.objects.filter(name=name)
+            search_lawyer = {
+                "Profile": ComicSerializerView(instance=search_s, many=True).data
+            }
+            return Response(search_lawyer)
+    return Response("non")
