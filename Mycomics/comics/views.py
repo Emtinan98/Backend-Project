@@ -74,11 +74,10 @@ def delete_comic(request: Request, comic_id):
     return Response({"msg": "Deleted Successfully"})
 
 
-# READER & ADMIN CHICK THE PERMISSION
 @api_view(['POST'])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-def add_feedback(request: Request):
+def add_feedback(request: Request, profile_id):
     if not request.user.is_authenticated or not request.user.has_perm('feedback.add_feedback'):
         return Response("Not Allowed", status=status.HTTP_400_BAD_REQUEST)
 
@@ -88,7 +87,9 @@ def add_feedback(request: Request):
     new_feedback = FeedbackSerializer(data=request.data)
     if new_feedback.is_valid():
         new_feedback.save()
-        return Response({"Feedback": new_feedback.data})
+        score = Profile.objects.get('score')
+        score.save()
+        return Response({"Feedback": new_feedback.data} , score)
     else:
         print(new_feedback.errors)
 
@@ -224,13 +225,14 @@ def top10_comic(request: Request):
 
 @api_view(['GET'])
 def top10_reader(request: Request):
-    top = Reader.objects.order_by('-score')[:10]
+    top = Profile.objects.order_by('-score')[:10]
 
     dataResponse = {
         "msg": "List of Top 10 Readers ",
-        "TOP 10 Readers : ": ReaderSerializer(instance=top, many=True).data
+        "TOP 10 Readers : ": ProfileSerializer(instance=top, many=True).data
     }
     return Response(dataResponse)
+
 
 
 @api_view(['GET'])
@@ -253,9 +255,9 @@ def search_for_profile(request: Request):
         profile = Profile.objects.all()
         name = request.GET.get('name', None)
         if name is not None:
-            search_s = Comic.objects.filter(name=name)
+            search_s = Profile.objects.filter(name=name)
             search_lawyer = {
-                "Profile": ComicSerializerView(instance=search_s, many=True).data
+                "Profile": ProfileSerializerView(instance=search_s, many=True).data
             }
             return Response(search_lawyer)
     return Response("non")

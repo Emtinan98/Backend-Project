@@ -42,8 +42,3 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = '__all__'
 
-
-class ReaderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Reader
-        fields = '__all__'
