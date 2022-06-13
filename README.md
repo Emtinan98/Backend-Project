@@ -12,10 +12,10 @@ It is a system to stimulate reading in the community, and points can be collecte
 ## List of Services / Features:
 
 - Display and browse all the Comics.
-- Display and browse all the readers.
-- Every Reader can get point if he write a feedback.
+- Display and browse all the readers profile.
+- Every Reader can get score if he write a feedback.
 - A display panel for the top 10 readers.
-- can view top 10 Comics.
+- A display panel for the top 10 Comics.
 
 
 ## User Stories
@@ -32,15 +32,19 @@ It is a system to stimulate reading in the community, and points can be collecte
 
 - Create, Read, Update, Delete feedback.
 - Create, Read, Update, Delete, Edit profile.
-- Search for Comics .
 - can follow other reader.
 - Can view panel for the top 10 readers.
-- can view top 10 Comics.
-
+- can view panel for the top 10 Comics.
+- Search for Profile.
+- Search for Comics.
+- Reader can add favorite comics.
+- Reader can list all his favorite comics.
+- 
 ### Visitor
 
 - View the Comics.
 - View the reader profile.
 - Can view panel for the top 10 readers.
-- can view top 10 Comics.
+- can view panel for the top 10 Comics.
 - Search for Comics.
+- Search for Profile.
