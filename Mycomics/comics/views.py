@@ -78,6 +78,7 @@ def delete_comic(request: Request, comic_id):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def add_feedback(request: Request, profile_id):
+    print("adding feedback")
     if not request.user.is_authenticated or not request.user.has_perm('feedback.add_feedback'):
         return Response("Not Allowed", status=status.HTTP_400_BAD_REQUEST)
 
@@ -87,9 +88,12 @@ def add_feedback(request: Request, profile_id):
     new_feedback = FeedbackSerializer(data=request.data)
     if new_feedback.is_valid():
         new_feedback.save()
-        score = Profile.objects.get('score')
-        score.save()
-        return Response({"Feedback": new_feedback.data} , score)
+
+        pro = Profile.objects.get(id=profile_id)
+        pro.score = pro.score + 1
+        pro.save()
+
+        return Response({"Feedback": new_feedback.data})
     else:
         print(new_feedback.errors)
 
@@ -135,7 +139,6 @@ def delete_feedback(request: Request, feedback_id):
     return Response({"msg": "Deleted Successfully"})
 
 
-# READER & ADMIN CHICK THE PERMISSION
 @api_view(['POST'])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
@@ -199,17 +202,20 @@ def delete_profile(request: Request, profile_id):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def follow(request: Request):
-    follower = request.POST['follower']
-    user = request.POST['user']
+    if request.method == 'POST':
+        follower = request.POST['follower']
+        user = request.POST['user']
 
-    if FollowersCount.objects.filter(follower=follower, user=user).first():
-        delete_follower = FollowersCount.objects.get(follower=follower, user=user)
-        delete_follower.delete()
-        return Response({"msg": "unfollow"})
+        if FollowersCount.objects.filter(follower=follower, user=user).first():
+            delete_follower = FollowersCount.objects.get(follower=follower, user=user)
+            delete_follower.delete()
+            return Response({"msg": "Follow"})
+        else:
+            new_follower = FollowersCount.objects.create(follower=follower, user=user)
+            new_follower.save()
+            return Response({"msg": "UnFollow"})
     else:
-        new_follower = FollowersCount.objects.create(follower=follower, user=user)
-        new_follower.save()
-        return Response({"msg": "follow"})
+        return Response('/')
 
 
 @api_view(['GET'])
@@ -234,7 +240,6 @@ def top10_reader(request: Request):
     return Response(dataResponse)
 
 
-
 @api_view(['GET'])
 def search_for_comic(request: Request):
     if request.method == 'GET':
@@ -242,10 +247,10 @@ def search_for_comic(request: Request):
         title = request.GET.get('title', None)
         if title is not None:
             search_s = Comic.objects.filter(title=title)
-            search_lawyer = {
+            search_comic = {
                 "Comic": ComicSerializerView(instance=search_s, many=True).data
             }
-            return Response(search_lawyer)
+            return Response(search_comic)
     return Response("non")
 
 
@@ -256,8 +261,41 @@ def search_for_profile(request: Request):
         name = request.GET.get('name', None)
         if name is not None:
             search_s = Profile.objects.filter(name=name)
-            search_lawyer = {
+            search_profile = {
                 "Profile": ProfileSerializerView(instance=search_s, many=True).data
             }
-            return Response(search_lawyer)
+            return Response(search_profile)
     return Response("non")
+
+
+@api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def add_favorite(request: Request):
+    if not request.user.is_authenticated or not request.user.has_perm('favorite.add_favorite'):
+        return Response("Not Allowed", status=status.HTTP_400_BAD_REQUEST)
+
+        # request.data.update(user=request.user.id) # the same thing
+    request.data["user"] = request.user.id  # the same as above CHICK
+
+    new_fav = FavoriteSerializer(data=request.data)
+    if new_fav.is_valid():
+        new_fav.save()
+        return Response({"Favorite": new_fav.data})
+    else:
+        print(new_fav.errors)
+
+    return Response("no", status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def list_favorite(request: Request):
+    favorite = Favorite.objects.all()
+
+    responseData = {
+        "msg": " Favorite : ",
+        "Favorite": FavoriteSerializer(instance=favorite, many=True).data
+    }
+    return Response(responseData)

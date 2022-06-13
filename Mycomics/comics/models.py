@@ -17,7 +17,7 @@ class Comic(models.Model):
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
-    comics = models.ForeignKey(Comic, on_delete=models.CASCADE)
+    comic = models.ForeignKey(Comic, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
@@ -28,6 +28,11 @@ class Profile(models.Model):
     bio = models.TextField()
     image = models.URLField()
     score = models.IntegerField()
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comic = models.ForeignKey(Comic, on_delete=models.CASCADE)
 
 
 class FollowersCount(models.Model):
