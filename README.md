@@ -32,7 +32,6 @@ It is a system to stimulate reading in the community, and points can be collecte
 
 - Create, Read, Update, Delete feedback.
 - Create, Read, Update, Delete, Edit profile.
-- can follow other reader.
 - Can view panel for the top 10 readers.
 - can view panel for the top 10 Comics.
 - Search for Profile.
