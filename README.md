@@ -25,6 +25,8 @@ It is a system to stimulate reading in the community, and points can be collecte
 
 - Create, Read, Update, Delete Comics.
 - Create, Read, Update, Delete feedback.
+- Create, Read, Update, Delete profile.
+- Create, Read, Update, Delete favorite.
 - Create, Read, Update, Delete Reader.
 - Create, Read, Update, Delete visitor.
 
