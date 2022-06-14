@@ -5,4 +5,6 @@ from .models import *
 admin.site.register(Comic)
 admin.site.register(Feedback)
 admin.site.register(Profile)
+admin.site.register(Favorite)
+
 

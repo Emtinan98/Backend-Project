@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 
 class Comic(models.Model):
+    """ This class for comic attributes """
     title = models.CharField(max_length=128)
     image = models.URLField()
     comic = models.URLField()
@@ -15,6 +16,7 @@ class Comic(models.Model):
 
 
 class Feedback(models.Model):
+    """ This class for feedback attributes """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     comic = models.ForeignKey(Comic, on_delete=models.CASCADE)
@@ -22,6 +24,7 @@ class Feedback(models.Model):
 
 
 class Profile(models.Model):
+    """ This class for profile attributes """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     birthdate = models.DateTimeField(datetime)
@@ -31,10 +34,8 @@ class Profile(models.Model):
 
 
 class Favorite(models.Model):
+    """ This class for favorite attributes """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comic = models.ForeignKey(Comic, on_delete=models.CASCADE)
 
 
-class FollowersCount(models.Model):
-    follower = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
