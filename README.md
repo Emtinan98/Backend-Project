@@ -40,7 +40,7 @@ It is a system to stimulate reading in the community, and points can be collecte
 - Search for Comics.
 - Reader can add favorite comics.
 - Reader can list all his favorite comics.
-- 
+
 ### Visitor
 
 - View the Comics.
