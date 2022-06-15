@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-7osf$m2-$vodw0^t)k47edz^7%lwvqj4@@o^cnuunsapzm6&@#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['my-comics-website1.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['mycomics-website-989.herokuapp.com', '127.0.0.1:8000']
 
 # Application definition
 
@@ -89,7 +89,7 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-
+DATABASES = {  'default': dj_database_url.config() }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
