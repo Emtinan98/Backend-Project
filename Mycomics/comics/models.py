@@ -14,6 +14,9 @@ class Comic(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(choices=[[1, "1 Star"], [2, "2 Star"], [3, "3 Star"], [4, "4 Star"], [5, "5 Star"]])
 
+    def __str__(self):
+        return self.title
+
 
 class Feedback(models.Model):
     """ This class for feedback attributes """
@@ -32,10 +35,11 @@ class Profile(models.Model):
     image = models.URLField()
     score = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+
 
 class Favorite(models.Model):
     """ This class for favorite attributes """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comic = models.ForeignKey(Comic, on_delete=models.CASCADE)
-
-

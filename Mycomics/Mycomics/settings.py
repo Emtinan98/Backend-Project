@@ -24,12 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7osf$m2-$vodw0^t)k47edz^7%lwvqj4@@o^cnuunsapzm6&@#'
-
+#SECRET_KEY = 'django-insecure-7osf$m2-$vodw0^t)k47edz^7%lwvqj4@@o^cnuunsapzm6&@#'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-7osf$m2-$vodw0^t)k47edz^7%lwvqj4@@o^cnuunsapzm6&@#')
+DEBUG = os.environ.get('DJANGO_DEBUG', True)
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = ['my-comics-website1.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['mycomics-website-989.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -87,9 +88,10 @@ DATABASES = {
 }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# DATABASES['default'].update(db_from_env)
+# DATABASES = {  'default': dj_database_url.config() }
 
-DATABASES = {  'default': dj_database_url.config() }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -124,8 +126,8 @@ USE_TZ = True
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATIC_URL = '/static/'
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=5),
 }
