@@ -29,12 +29,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-7osf$m2-$vodw0
 DEBUG = os.environ.get('DJANGO_DEBUG', True)
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['mycomics-website-989.herokuapp.com', '127.0.0.1']
-=======
-ALLOWED_HOSTS = ['mycomics-website-989.herokuapp.com', '127.0.0.1:8000']
->>>>>>> 597c4eb26a0605d976c249f8fd07d331f8623083
+
+#ALLOWED_HOSTS = ['mycomics-website-989.herokuapp.com', '127.0.0.1:8000']
+
 
 # Application definition
 
