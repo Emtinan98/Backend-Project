@@ -1,4 +1,4 @@
-Deployment link : https://my-comics-website1.herokuapp.com/
+Deployment link : https://mycomics-website-989.herokuapp.com/
 # Project Name: MyComics
 
 ## Idea:

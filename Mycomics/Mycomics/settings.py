@@ -30,7 +30,11 @@ DEBUG = os.environ.get('DJANGO_DEBUG', True)
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['mycomics-website-989.herokuapp.com', '127.0.0.1']
+=======
+ALLOWED_HOSTS = ['mycomics-website-989.herokuapp.com', '127.0.0.1:8000']
+>>>>>>> 597c4eb26a0605d976c249f8fd07d331f8623083
 
 # Application definition
 
@@ -91,7 +95,7 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 # DATABASES['default'].update(db_from_env)
 # DATABASES = {  'default': dj_database_url.config() }
 
-
+DATABASES = {  'default': dj_database_url.config() }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
